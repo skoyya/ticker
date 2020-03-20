@@ -32,9 +32,13 @@ func (t *Ticker) updateTickerValue(upd UpdateTicker) {
 	}
 }
 
-func (t *Ticker) UpdateTicker(tickerName string, tickerValue string) {
-	u := UpdateTicker{tickerName, tickerValue}
-	t.updateChannel <- u
+func (t *Ticker) UpdateTicker(tickerName string, tickerValue string) bool {
+	if t.isRunning {
+		u := UpdateTicker{tickerName, tickerValue}
+	    t.updateChannel <- u
+		return true
+    }
+	return false
 }
 
 func (t *Ticker) IsRunning() bool {

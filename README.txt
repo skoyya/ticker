@@ -14,3 +14,9 @@ Few things knowingly handled differently as I have concentrated on the acheiving
 6)unit test not wrote, production issue cameup and i got to concentrate on that. I can go over on the calls. 
 
 
+To run unit-test
+in src/server/ 
+go test -v
+
+in src/ticker/ 
+go test -v

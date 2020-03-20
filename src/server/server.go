@@ -26,7 +26,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     case "PUT":
 		tickerName, tickerNameExists := r.URL.Query()["tickerName"]
 		fmt.Println(tickerName)
-        if !tickerNameExists || len(tickerName[0]) < 1 {
+        if !tickerNameExists || len(tickerName[0]) == 0 {
             w.WriteHeader(http.StatusBadRequest)
             w.Write([]byte(`{"message": "Url Param 'tickerName' is missing"}`))
             log.Println("Url Param 'tickerName' is missing")
@@ -34,7 +34,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		tickerValue, tickerValueExists := r.URL.Query()["tickerValue"]
 		fmt.Println(tickerValue)
-        if !tickerValueExists || len(tickerValue[0]) < 1 {
+        if !tickerValueExists || len(tickerValue[0]) ==  0 {
             w.WriteHeader(http.StatusBadRequest)
             w.Write([]byte(`{"message": "Url Param 'tickerValue' is missing"}`))
             log.Println("Url Param 'tickerValue' is missing")
@@ -50,6 +50,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
     default:
         w.WriteHeader(http.StatusNotFound)
-        w.Write([]byte(`{"message": "Failed, Not Supported operation"}`))
+        w.Write([]byte(`{"message": "Failed, Not Supported method"}`))
     }
 }
